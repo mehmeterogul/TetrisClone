@@ -22,12 +22,6 @@ public class Board : MonoBehaviour
         DrawEmptyCells();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void DrawEmptyCells()
     {
         if(m_emptySprite)

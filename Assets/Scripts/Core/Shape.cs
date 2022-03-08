@@ -53,10 +53,4 @@ public class Shape : MonoBehaviour
         // InvokeRepeating("MoveDown", 0, 0.5f);
         // InvokeRepeating("RotateRight", 0, 1f);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
