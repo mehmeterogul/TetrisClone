@@ -11,27 +11,27 @@ public class Shape : MonoBehaviour
         transform.position += moveDirection;
     }
 
-    void MoveLeft()
+    public void MoveLeft()
     {
         Move(new Vector3(-1, 0, 0));
     }
 
-    void MoveRight()
+    public void MoveRight()
     {
         Move(new Vector3(1, 0, 0));
     }
 
-    void MoveUp()
+    public void MoveUp()
     {
         Move(new Vector3(0, 1, 0));
     }
 
-    void MoveDown()
+    public void MoveDown()
     {
         Move(new Vector3(0, -1, 0));
     }
 
-    void RotateRight()
+    public void RotateRight()
     {
         if(m_canRotate)
         {
@@ -39,7 +39,7 @@ public class Shape : MonoBehaviour
         }
     }
 
-    void RotateLeft()
+    public void RotateLeft()
     {
         if (m_canRotate)
         {

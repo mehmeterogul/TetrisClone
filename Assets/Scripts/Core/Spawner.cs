@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    // library of shapes, make sure you don't leave any blanks int he Inspector
     public Shape[] m_allShapes;
 
+    // returns a random shape from library of shapes
     Shape GetRandomShape()
     {
         int i = Random.Range(0, m_allShapes.Length);
@@ -21,6 +23,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    // instantiate a shape at the spawner's position
     public Shape SpawnShape()
     {
         Shape shape = null;
@@ -35,17 +38,5 @@ public class Spawner : MonoBehaviour
             Debug.LogWarning("WARNING! Invalid shape in spawner!");
             return null;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

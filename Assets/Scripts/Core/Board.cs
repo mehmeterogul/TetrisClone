@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
+    [Header("Board Components")]
     [SerializeField] Transform m_emptySprite;
     [SerializeField] int m_height = 30;
     [SerializeField] int m_width = 10;
@@ -22,6 +23,7 @@ public class Board : MonoBehaviour
         DrawEmptyCells();
     }
 
+    // create board with empty cell sprites
     void DrawEmptyCells()
     {
         if(m_emptySprite)

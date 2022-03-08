@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    // reference to the game board
     Board m_gameBoard;
+
+    // reference to the shape spawner
     Spawner m_spawner;
+
+    // currently active shape
+    Shape m_activeShape;
+
+    // time interval that moving down of active shape
+    [SerializeField] float dropInterval = 1f;
+    float timeToDrop;
 
     // Start is called before the first frame update
     void Start()
     {
+        // find board and spawner
         m_gameBoard = FindObjectOfType<Board>();
         m_spawner = FindObjectOfType<Spawner>();
 
@@ -17,6 +28,11 @@ public class GameController : MonoBehaviour
         {
             // m_spawner.transform.position = Vector3Int.RoundToInt(m_spawner.transform.position);
             m_spawner.transform.position = Vectorf.Round(m_spawner.transform.position);
+
+            if (m_activeShape == null)
+            {
+                m_activeShape = m_spawner.SpawnShape();
+            }
         }
 
         if(!m_gameBoard)
@@ -33,6 +49,20 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // if there is no game board or spawner object, then don't run the game
+        if(!m_gameBoard || !m_spawner)
+        {
+            return;
+        }
+
+        if(Time.time > timeToDrop)
+        {
+            timeToDrop = Time.time + dropInterval;
+
+            if (m_activeShape)
+            {
+                m_activeShape.MoveDown();
+            }
+        }
     }
 }
