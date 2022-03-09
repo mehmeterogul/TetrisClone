@@ -55,7 +55,27 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        if(Time.time > timeToDrop)
+        if(Input.GetButton("MoveRight"))
+        {
+            m_activeShape.MoveRight();
+
+            if(!m_gameBoard.IsValidPosition(m_activeShape))
+            {
+                m_activeShape.MoveLeft();
+            }
+        }
+
+        if (Input.GetButton("MoveLeft"))
+        {
+            m_activeShape.MoveLeft();
+
+            if (!m_gameBoard.IsValidPosition(m_activeShape))
+            {
+                m_activeShape.MoveRight();
+            }
+        }
+
+        if (Time.time > timeToDrop)
         {
             timeToDrop = Time.time + dropInterval;
 
