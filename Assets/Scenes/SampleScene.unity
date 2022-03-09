@@ -1504,7 +1504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409ec9ea7cf988c45a4ab525f21a828b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropInterval: 0.25
+  dropInterval: 0.1
 --- !u!4 &1718005468
 Transform:
   m_ObjectHideFlags: 0
