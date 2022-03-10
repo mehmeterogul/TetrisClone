@@ -92,7 +92,7 @@ public class Board : MonoBehaviour
 
     bool IsComplete(int y)
     {
-        for (int x = 0; x < m_width; x++)
+        for (int x = 0; x < m_width; ++x)
         {
             if(m_grid[x, y] == null)
             {
@@ -105,7 +105,7 @@ public class Board : MonoBehaviour
 
     void ClearRow(int y)
     {
-        for (int x = 0; x < m_width; x++)
+        for (int x = 0; x < m_width; ++x)
         {
             if(m_grid[x, y] != null)
             {
@@ -118,7 +118,7 @@ public class Board : MonoBehaviour
 
     void ShiftOneRowDown(int y)
     {
-        for (int x = 0; x < m_width; x++)
+        for (int x = 0; x < m_width; ++x)
         {
             if (m_grid[x, y] != null)
             {
@@ -131,7 +131,7 @@ public class Board : MonoBehaviour
 
     void ShiftRowsDown(int startY)
     {
-        for (int i = startY; i < m_height; i++)
+        for (int i = startY; i < m_height; ++i)
         {
             ShiftOneRowDown(i);
         }
@@ -139,12 +139,12 @@ public class Board : MonoBehaviour
 
     public void ClearAllRows()
     {
-        for (int y = 0; y < m_height; y++)
+        for (int y = 0; y < m_height; ++y)
         {
             if(IsComplete(y))
             {
                 ClearRow(y);
-                ShiftOneRowDown(y + 1);
+                ShiftRowsDown(y + 1);
                 y--;
             }
         }
