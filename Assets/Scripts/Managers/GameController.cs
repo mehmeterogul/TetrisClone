@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -25,6 +26,10 @@ public class GameController : MonoBehaviour
 
     [SerializeField] [Range(0.02f, 1f)] float m_downKeyRepeatRate = 0.25f;
     float m_timeToNextDownKey;
+
+    bool m_gameOver = false;
+
+    public GameObject m_gameOverPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -56,13 +61,18 @@ public class GameController : MonoBehaviour
                 m_activeShape = m_spawner.SpawnShape();
             }
         }
+
+        if (m_gameOverPanel)
+        {
+            m_gameOverPanel.SetActive(false);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if there is no game board, spawner object or active shape, then don't run the game
-        if (!m_gameBoard || !m_spawner || !m_activeShape)
+        // if there is no game board, spawner object or active shape, then don't run the game. if game is over then stop the game
+        if (!m_gameBoard || !m_spawner || !m_activeShape || m_gameOver)
         {
             return;
         }
@@ -111,7 +121,14 @@ public class GameController : MonoBehaviour
 
             if (!m_gameBoard.IsValidPosition(m_activeShape))
             {
-                LandShape();
+                if(m_gameBoard.IsOverLimit(m_activeShape))
+                {
+                    GameOver();
+                }
+                else
+                {
+                    LandShape();
+                }
             }
         }
     }
@@ -128,5 +145,23 @@ public class GameController : MonoBehaviour
         m_timeToNextDownKey = Time.time;
 
         m_gameBoard.ClearAllRows();
+    }
+
+    private void GameOver()
+    {
+        m_activeShape.MoveUp();
+        m_gameOver = true;
+        Debug.LogWarning(m_activeShape.name + " is over the limit");
+
+        if (m_gameOverPanel)
+        {
+            m_gameOverPanel.SetActive(true);
+        }
+    }
+
+    public void Restart()
+    {
+        Debug.Log("Restarted");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
